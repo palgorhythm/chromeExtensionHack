@@ -1,13 +1,17 @@
 let background = document.createElement("div");
-background.className = "blackbg";
+background.className = "content-page-popup fade";
 background.innerHTML = `
-  <div class="text-container">
-    <form class="theForm">
-      <input type="text" class="txt-input" placeholder="Hi, what\'s your name?"></input>
-      <input type="submit" class="submit-txt"></input>
-    </form>
-  </div>`;
+<div class="introspect-title">introspect</div>
+<div class="text-container">
+  <form class="theForm">
+    <input type="text" class="txt-input" autofocus="autofocus" placeholder="how are you feeling ?"></input>
+    <input type="submit" value="submit" class="submit-txt"></input>
+  </form>
+</div>`;
 document.body.parentNode.insertBefore(background, document.body);
+const theForm = document.querySelector('.theForm');
+
+background.classList.remove('fade');
 
 chrome.storage.sync.get(['len'], function(result) {
   const curLen = result.len;
@@ -17,12 +21,14 @@ chrome.storage.sync.get(['len'], function(result) {
     });
   }
 });
-const theForm = document.querySelector('.theForm');
+const monthNames = ["jan", "feb", "mar", "apr", "may", "jun",
+  "jul", "aug", "sept", "oct", "nov", "dec"];
 
 theForm.onsubmit = (e) => {
+  e.preventDefault();
   const diaryEntry = document.querySelector('.txt-input').value;
   const timeOfEntry = new Date();
-  const entryAndTime = JSON.stringify([diaryEntry, timeOfEntry.toLocaleDateString(), timeOfEntry.toLocaleTimeString()]);
+  const entryAndTime = JSON.stringify([diaryEntry, monthNames[timeOfEntry.getMonth()] + ' ' + timeOfEntry.getDate() + ' '+ timeOfEntry, timeOfEntry.getHours() + ':'+ timeOfEntry.getMinutes()]);
   // console.log(parseInt(localStorage.getItem('length')));
   chrome.storage.sync.get(['len'], function(result) {
     const curLen = result.len;
@@ -33,30 +39,10 @@ theForm.onsubmit = (e) => {
       });
     });
   });
-
-  const modal = document.querySelector(".blackbg");
-  modal.parentNode.removeChild(modal);
-
-  return false;
-};
-
-document.addEventListener("DOMContentLoaded", function(e) {
-  document.body.theForm = "";
-  document.body.theForm.remove("fade");
-});
-
-// function popup() {
-//   chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-//     console.log(response.farewell);
-//   });
-// }
-// popup();
-// document.addEventListener("DOMContentLoaded", popup);
-
-// chrome.storage.sync.set({mykey: 'pizza'}, function() {
-//   console.log('Value is set to ' + 'pizza');
-// });
-
-// chrome.storage.sync.get(['mykey'], function(result) {
-//   console.log('Value currently is ' + result.key);
-// });
+  const submitButton = document.querySelector('.submit-txt');
+  submitButton.style.padding = "50px";
+  setTimeout(() => {
+    const modal = document.querySelector(".content-page-popup");
+    modal.parentNode.removeChild(modal);
+  }, 1000);
+};  

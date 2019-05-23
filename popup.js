@@ -1,36 +1,3 @@
-console.log('wheet');
-// chrome.storage.sync.get('color', function(data) {
-//   console.log(data.color);
-// });
-
-// chrome.runtime.onConnect.addListener(port => {
-//   console.log('connected ', port);
-//   chrome.runtime.onMessageExternal.addListener(
-//     function(request, sender, sendResponse) {
-//       console.log(sender.tab ?
-//                   "from a content script:" + sender.tab.url :
-//                   "from the extension");
-//       console.log('nn');
-//       // if (request.greeting == "hello")
-//       //   sendResponse({farewell: "goodbye"});
-//     });
-// });
-// chrome.runtime.onMessage.addListener(
-//   function(request, sender, sendResponse) {
-//     if( request.message === "start" ) {
-//       console.log('ya');
-//     }
-//   }
-// );
-
-// (function () {
-//   chrome.storage.onChanged.addListener(function (changes,areaName) {
-//       console.log("New item in storage",changes.visitedPages.newValue);
-//   })
-// })();
-
-
-
 window.onload = function() {
   chrome.storage.sync.get(null, function(items) {
     const storageObj = items;
@@ -53,12 +20,3 @@ window.onload = function() {
     }
   });
 }
-
-// function retrieve(success) {
-//   console.log(chrome.tabs.getCurrent());
-//   chrome.storage.get(function (data) {
-//     console.log("The data stored is:" + JSON.stringify(data));
-//   });
-// }
-
-// retrieve(true);
