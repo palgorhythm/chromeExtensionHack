@@ -1,12 +1,12 @@
-let background = document.createElement('div');
-background.className = 'blackbg';
+let background = document.createElement("div");
+background.className = "blackbg";
 background.innerHTML = `
   <div class="text-container">
     <form class="theForm">
       <input type="text" class="txt-input" placeholder="Hi, what\'s your name?"></input>
       <input type="submit" class="submit-txt"></input>
     </form>
-  </div>`
+  </div>`;
 document.body.parentNode.insertBefore(background, document.body);
 chrome.storage.sync.set({len: 0}, function() {
   console.log('len is set to ' + 0);
@@ -28,8 +28,21 @@ theForm.onsubmit = (e) => {
     });
   });
 
+  const modal = document.querySelector(".blackbg");
+  modal.parentNode.removeChild(modal);
+  // modal.style.display = "none";
+
+  // document.body.querySelector.add("fade");
+  document.body.theForm.add("fade");
+
   return false;
 };
+
+document.addEventListener("DOMContentLoaded", function(e) {
+  document.body.theForm = "";
+  document.body.theForm.remove("fade");
+});
+
 // function popup() {
 //   chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
 //     console.log(response.farewell);
