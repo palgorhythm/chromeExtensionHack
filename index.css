@@ -5,15 +5,12 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: rgb(165, 79, 69);
-    opacity: .92;
+    background-color: rgb(65, 98, 230);
+    opacity: .95;
 }
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: black;
+
+html{
   font-family: 'Poppins', sans-serif;
-  font-size: 50px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 }
 
 .submit-txt{
@@ -33,10 +30,46 @@
   /* position: absolute; */
   /* margin: 0 0 auto; */
   margin-top: 50px;
+  padding: 20px;
 }
 
-.form{
+.txt-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: red;
+  opacity: 1; /* Firefox */
+  font-size: 32px;
+}
+
+.theForm{
   width: 50%;
   margin: 20vw auto 0 auto;
   text-align: center;
+}
+
+#editor { 
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#time{
+  font-size: 40px;
+  color: white;
+  padding: 40px;
+
+}
+.boxes{
+  text-align: center;
+}
+
+.repl{
+  border: 5px solid salmon;
+  border-radius: 10px;
+}
+
+.dev-docs{
+  margin-left: 40px;
+  border: 5px solid salmon;
+  border-radius: 10px;
 }
