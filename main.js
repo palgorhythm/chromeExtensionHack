@@ -8,8 +8,14 @@ background.innerHTML = `
     </form>
   </div>`;
 document.body.parentNode.insertBefore(background, document.body);
-chrome.storage.sync.set({len: 0}, function() {
-  console.log('len is set to ' + 0);
+
+chrome.storage.sync.get(['len'], function(result) {
+  const curLen = result.len;
+  if(!curLen){
+    chrome.storage.sync.set({len: 0}, function() {
+      console.log('len is set to ' + 0);
+    });
+  }
 });
 const theForm = document.querySelector('.theForm');
 
@@ -30,10 +36,6 @@ theForm.onsubmit = (e) => {
 
   const modal = document.querySelector(".blackbg");
   modal.parentNode.removeChild(modal);
-  // modal.style.display = "none";
-
-  // document.body.querySelector.add("fade");
-  document.body.theForm.add("fade");
 
   return false;
 };
