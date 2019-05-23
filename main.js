@@ -8,26 +8,40 @@ background.innerHTML = `
     </form>
   </div>`
 document.body.parentNode.insertBefore(background, document.body);
-
-window.onload = (event) => {
-};
-
-localStorage.clear();
-localStorage.setItem('length', '0');
-if(!localStorage.getItem('length')){
-  localStorage.setItem('length', '0');
-}
+chrome.storage.sync.set({len: 0}, function() {
+  console.log('len is set to ' + 0);
+});
 const theForm = document.querySelector('.theForm');
+
 theForm.onsubmit = (e) => {
   const diaryEntry = document.querySelector('.txt-input').value;
   const timeOfEntry = new Date();
   const entryAndTime = JSON.stringify([diaryEntry, timeOfEntry.toLocaleDateString(), timeOfEntry.toLocaleTimeString()]);
   // console.log(parseInt(localStorage.getItem('length')));
-  localStorage.setItem(`${localStorage.getItem('length')}`, entryAndTime);
-  localStorage.setItem('length', (parseInt(localStorage.getItem('length')) + 1).toString());
-  for(i = 0; i < parseInt(localStorage.getItem('length')); i += 1){
-    const curEntry = localStorage.getItem(i.toString());
-    // console.log(JSON.parse(curEntry));
-  }
+  chrome.storage.sync.get(['len'], function(result) {
+    const curLen = result.len;
+    chrome.storage.sync.set({[curLen]: entryAndTime}, function() {
+      console.log('current KEY AND entry is ' + curLen + ' ' + entryAndTime);
+      chrome.storage.sync.set({len: curLen + 1}, function() {
+        // console.log(curLen + 1);
+      });
+    });
+  });
+
   return false;
 };
+// function popup() {
+//   chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+//     console.log(response.farewell);
+//   });
+// }
+// popup();
+// document.addEventListener("DOMContentLoaded", popup);
+
+// chrome.storage.sync.set({mykey: 'pizza'}, function() {
+//   console.log('Value is set to ' + 'pizza');
+// });
+
+// chrome.storage.sync.get(['mykey'], function(result) {
+//   console.log('Value currently is ' + result.key);
+// });
