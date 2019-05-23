@@ -7,7 +7,10 @@
         {
             "matches": ["<all_urls>"],
             "js": ["jquery.min.js","main.js"],
-            "css": ["index.css"]
+            "css": ["index.css"],
+            "permissions": [
+              "storage"
+            ]
         }
     ],
     "browser_action": { 

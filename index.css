@@ -1,3 +1,42 @@
-.beautText {
-    color: 'green';
+@import url('https://fonts.googleapis.com/css?family=Poppins:300&display=swap');
+
+.blackbg {
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgb(165, 79, 69);
+    opacity: .92;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  font-size: 50px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.submit-txt{
+  margin: 20px !important;
+  width: 50% !important;
+  background-color: green !important;
+  border: none !important;
+  border-radius: 120px !important;
+  padding: 20px !important;
+}
+
+.txt-input{
+  border: 1px solid black;
+  height: 120px;
+  width: 50vw;
+  text-align: center;
+  /* position: absolute; */
+  /* margin: 0 0 auto; */
+  margin-top: 50px;
+}
+
+.form{
+  width: 50%;
+  margin: 20vw auto 0 auto;
+  text-align: center;
 }
