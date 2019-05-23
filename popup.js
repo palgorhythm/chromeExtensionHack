@@ -25,12 +25,3 @@ window.onload = function() {
     }
   });
 };
-
-// function retrieve(success) {
-//   console.log(chrome.tabs.getCurrent());
-//   chrome.storage.get(function (data) {
-//     console.log("The data stored is:" + JSON.stringify(data));
-//   });
-// }
-
-// retrieve(true);
