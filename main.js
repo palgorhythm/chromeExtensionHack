@@ -8,21 +8,31 @@ background.innerHTML = `
     </form>
   </div>`;
 document.body.parentNode.insertBefore(background, document.body);
-chrome.storage.sync.set({len: 0}, function() {
-  console.log('len is set to ' + 0);
-});
-const theForm = document.querySelector('.theForm');
+const theForm = document.querySelector(".theForm");
 
-theForm.onsubmit = (e) => {
-  const diaryEntry = document.querySelector('.txt-input').value;
+chrome.storage.sync.get(["len"], function(result) {
+  const curLen = result.len;
+  if (!curLen) {
+    chrome.storage.sync.set({ len: 0 }, function() {
+      console.log("len is set to" + 0);
+    });
+  }
+});
+
+theForm.onsubmit = e => {
+  const diaryEntry = document.querySelector(".txt-input").value;
   const timeOfEntry = new Date();
-  const entryAndTime = JSON.stringify([diaryEntry, timeOfEntry.toLocaleDateString(), timeOfEntry.toLocaleTimeString()]);
+  const entryAndTime = JSON.stringify([
+    diaryEntry,
+    timeOfEntry.toLocaleDateString(),
+    timeOfEntry.toLocaleTimeString()
+  ]);
   // console.log(parseInt(localStorage.getItem('length')));
-  chrome.storage.sync.get(['len'], function(result) {
+  chrome.storage.sync.get(["len"], function(result) {
     const curLen = result.len;
-    chrome.storage.sync.set({[curLen]: entryAndTime}, function() {
-      console.log('current KEY AND entry is ' + curLen + ' ' + entryAndTime);
-      chrome.storage.sync.set({len: curLen + 1}, function() {
+    chrome.storage.sync.set({ [curLen]: entryAndTime }, function() {
+      console.log("current KEY AND entry is " + curLen + " " + entryAndTime);
+      chrome.storage.sync.set({ len: curLen + 1 }, function() {
         // console.log(curLen + 1);
       });
     });
