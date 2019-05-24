@@ -11,7 +11,7 @@ background.innerHTML = `
 document.body.parentNode.insertBefore(background, document.body);
 const theForm = document.querySelector(".theForm");
 
-background.classList.remove("fade");
+window.onload = () => {background.classList.remove("fade")};
 
 chrome.storage.sync.get(["len"], function(result) {
   const curLen = result.len;
@@ -62,7 +62,8 @@ theForm.onsubmit = e => {
   const submitButton = document.querySelector(".submit-txt");
   submitButton.style.padding = "50px";
   const modal = document.querySelector(".content-page-popup");
-  modal.style.display = 'none';
+  background.classList.add("fade");
+  setTimeout(() => {modal.style.display = 'none'}, 2000);
 };
 
 
