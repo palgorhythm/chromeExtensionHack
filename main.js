@@ -47,7 +47,7 @@ theForm.onsubmit = e => {
       timeOfEntry.getDate() +
       " " +
       timeOfEntry.getFullYear(),
-    timeOfEntry.getHours() + ":" + timeOfEntry.getMinutes()
+    formatAMPM(timeOfEntry)
   ]);
   // console.log(parseInt(localStorage.getItem('length')));
   chrome.storage.sync.get(["len"], function(result) {
@@ -61,8 +61,18 @@ theForm.onsubmit = e => {
   });
   const submitButton = document.querySelector(".submit-txt");
   submitButton.style.padding = "50px";
-  setTimeout(() => {
-    const modal = document.querySelector(".content-page-popup");
-    modal.parentNode.removeChild(modal);
-  }, 1000);
+  const modal = document.querySelector(".content-page-popup");
+  modal.style.display = 'none';
 };
+
+
+function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
