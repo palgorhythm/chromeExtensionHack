@@ -7,17 +7,20 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "exclude_matches":["*://www.google.com/*"],
   "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "exclude_matches":["*://www.google.com/*"],
       "js": ["main.js"],
       "css": ["index.css"]
     }
   ],
+  "icons": { "16": "i.png",
+    "48": "i.png",
+    "128": "i.png" },
   "browser_action": {
-    "default_icon": "faceImg.jpg",
+    "default_icon": "i.png",
     "default_title": "introspect",
     "default_popup": "index.html"
   }
