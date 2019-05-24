@@ -46,7 +46,7 @@ theForm.onsubmit = e => {
       " " +
       timeOfEntry.getDate() +
       " " +
-      timeOfEntry,
+      timeOfEntry.getFullYear(),
     timeOfEntry.getHours() + ":" + timeOfEntry.getMinutes()
   ]);
   // console.log(parseInt(localStorage.getItem('length')));
